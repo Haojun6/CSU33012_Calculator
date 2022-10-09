@@ -1,31 +1,41 @@
+import operations
+
 OPERATORS = ('+','-','*')
 DIGITS = ('1','2','3','4','5','6','7','8','9','0')
 
+# check if the input is valid string
 def is_valid(lst):
     for i in lst:
         if i not in OPERATORS and i not in DIGITS:
             return False
     return True
 
+# main calc part
 def calc(lst):
     number = ''
     for i in lst:
+        # if is digit then put in digit list
         if is_digit(i):
             number = number + i
+        # if is operator then put in operator list
         else:
             number_list.append(int(number))
             operator_list.append(i)
+            # reset the tmp number
             number = ''
     number_list.append(int(number))
+    # multiply as first priority
     mul()
+    # add and sub as second priority in order
     add_sub()
     return number_list[0]
 
+# calculate multiply operation, first priority
 def mul():
     i = 0
     while i < operator_list.__len__():
         if operator_list[i] == '*':
-            product = number_list[i] * number_list[i + 1]
+            product = operations.multiply(number_list[i],number_list[i + 1])
             operator_list.pop(i)
             number_list.pop(i)
             number_list.pop(i)
@@ -33,27 +43,28 @@ def mul():
             i-=1
         i+=1
 
+# calculate add/sub operations, second priority
 def add_sub():
     for i in range(1,number_list.__len__()):
         number1 = number_list[0]
         number2 = number_list[1]
         if operator_list[0] == '+':
-            result = number1 + number2
+            result = operations.add(number1,number2)
         elif operator_list[0] == '-':
-            result = number1 - number2
+            result = operations.subtract(number1,number2)
         operator_list.pop(0)
         number_list.pop(1)
         number_list[0] = result
 
+# check if is a digit
 def is_digit(digit):
     return digit in DIGITS
 
-while True:
-    sequence = input("Please enter a sequence that you want to compute: (q to end)")
+
+if __name__ == '__main__':
+    sequence = input("Please enter a sequence that you want to compute: (e.g. 23+34-12*76+4)")
     se_lst = list(sequence)
-    if sequence == 'q':
-        break
-    elif is_valid(se_lst):
+    if is_valid(se_lst):
         try:
             number_list = []
             operator_list = []
@@ -62,12 +73,6 @@ while True:
             print(e)
         else:
             print("The result is {0}.".format(result))
-        finally:
-            again = input("Would you like to have another try? y/n")
-            if again == 'y':
-                continue
-            elif again == 'n':
-                break
     else:
         print("Error:The sequence must only include operators and digits")
 
