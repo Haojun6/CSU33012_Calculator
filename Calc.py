@@ -2,6 +2,8 @@ import operations
 
 OPERATORS = ('+','-','*')
 DIGITS = ('1','2','3','4','5','6','7','8','9','0')
+number_list = []   # a list to contain numbers calculated
+operator_list = [] # a list to contain operators used
 
 # check if the input is valid string
 def is_valid(lst):
@@ -60,14 +62,11 @@ def add_sub():
 def is_digit(digit):
     return digit in DIGITS
 
-
-if __name__ == '__main__':
-    sequence = input("Please enter a sequence that you want to compute: (e.g. 23+34-12*76+4)")
+# main part to take in a mathematical expression and print answer
+def main(sequence):
     se_lst = list(sequence)
     if is_valid(se_lst):
         try:
-            number_list = []
-            operator_list = []
             result = calc(se_lst)
         except BaseException as e:
             print(e)
@@ -75,8 +74,6 @@ if __name__ == '__main__':
             print("The result is {0}.".format(result))
     else:
         print("Error:The sequence must only include operators and digits")
-
-
 
 
 
