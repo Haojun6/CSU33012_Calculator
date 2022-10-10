@@ -13,7 +13,8 @@ def is_valid(lst):
     return True
 
 # main calc part
-def calc(lst):
+def calc(sequence):
+    lst = list(sequence)
     number = ''
     for i in lst:
         # if is digit then put in digit list
@@ -63,18 +64,21 @@ def is_digit(digit):
     return digit in DIGITS
 
 # main part to take in a mathematical expression and print answer
-def main(sequence):
+def main():
+    sequence = input("Please enter a sequence that you want to compute: e.g.1+2-3*4")
     se_lst = list(sequence)
     if is_valid(se_lst):
         try:
-            result = calc(se_lst)
+            result = calc(sequence)
         except BaseException as e:
             print(e)
         else:
             print("The result is {0}.".format(result))
+            return result
     else:
         print("Error:The sequence must only include operators and digits")
 
 
+main()
 
 
