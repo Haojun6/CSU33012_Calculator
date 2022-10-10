@@ -64,7 +64,7 @@ def is_digit(digit):
     return digit in DIGITS
 
 # main part to take in a mathematical expression and print answer
-def main():
+if __name__ == '__main__':
     sequence = input("Please enter a sequence that you want to compute: e.g.1+2-3*4")
     se_lst = list(sequence)
     if is_valid(se_lst):
@@ -78,7 +78,5 @@ def main():
     else:
         print("Error:The sequence must only include operators and digits")
 
-
-main()
 
 
