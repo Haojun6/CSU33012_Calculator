@@ -5,12 +5,14 @@ DIGITS = ('1','2','3','4','5','6','7','8','9','0')
 number_list = []   # a list to contain numbers calculated
 operator_list = [] # a list to contain operators used
 
+
 # check if the input is valid string
 def is_valid(lst):
     for i in lst:
         if i not in OPERATORS and i not in DIGITS:
             return False
     return True
+
 
 # main calc part
 def calc(sequence):
@@ -31,7 +33,10 @@ def calc(sequence):
     mul()
     # add and sub as second priority in order
     add_sub()
-    return number_list[0]
+    result = number_list[0]
+    number_list.pop()
+    return result
+
 
 # calculate multiply operation, first priority
 def mul():
@@ -46,6 +51,7 @@ def mul():
             i-=1
         i+=1
 
+
 # calculate add/sub operations, second priority
 def add_sub():
     for i in range(1,number_list.__len__()):
@@ -59,12 +65,14 @@ def add_sub():
         number_list.pop(1)
         number_list[0] = result
 
+
 # check if is a digit
 def is_digit(digit):
     return digit in DIGITS
 
+
 # main part to take in a mathematical expression and print answer
-if __name__ == '__main__':
+def main():
     sequence = input("Please enter a sequence that you want to compute: e.g.1+2-3*4")
     se_lst = list(sequence)
     if is_valid(se_lst):
@@ -74,8 +82,12 @@ if __name__ == '__main__':
             print(e)
         else:
             print("The result is {0}.".format(result))
+            return result
     else:
         print("Error:The sequence must only include operators and digits")
 
+
+if __name__ == '__main__':
+    main()
 
 
