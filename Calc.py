@@ -74,7 +74,6 @@ if __name__ == '__main__':
             print(e)
         else:
             print("The result is {0}.".format(result))
-            return result
     else:
         print("Error:The sequence must only include operators and digits")
 
